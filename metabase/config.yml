@@ -1,0 +1,7 @@
+version: 1
+config:
+  users:
+    - first_name: Bawse
+      last_name: BOFH
+      password: 123
+      email: spam@bofh.guru

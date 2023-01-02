@@ -1,0 +1,30 @@
+# docker-compose.yml
+version: '3'
+services:
+  metabase:
+    build: ./metabase
+    container_name: metabase
+    depends_on:
+      - mdb
+    environment:
+      - MB_DB_TYPE=postgres
+      - MB_DB_DBNAME=mirkwood
+      - MB_DB_PORT=5432
+      - MB_DB_USER=mirkwood
+      - MB_DB_PASS=mirkwood
+      - MB_DB_HOST=mdb
+      - MB_CONFIG_FILE_PATH = ./config.yml
+    ports:
+      - "3000:3000"
+
+  mdb:
+    image: 'postgres'
+    container_name: mdb
+    environment:
+      - POSTGRES_USER=mirkwood
+      - POSTGRES_PASSWORD=mirkwood
+      - POSTGRES_DB=mirkwood
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+volumes:
+  database-data:
